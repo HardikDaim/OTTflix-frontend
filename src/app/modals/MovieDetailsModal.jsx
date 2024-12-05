@@ -5,12 +5,11 @@ import { motion } from "framer-motion"; // Import Framer Motion
 import VideoPlayer from "./VideoPlayer.jsx";
 
 const MovieDetailsModal = ({ movie, onClose }) => {
-  if (!movie) return null; // If no movie is passed, return nothing
-
   const [isMuted, setIsMuted] = useState(true); // State to manage video mute/unmute
   const [isVideoLoaded, setIsVideoLoaded] = useState(false);
   const [showVideoPlayer, setShowVideoPlayer] = useState(false);
-
+  
+  if (!movie) return null; // If no movie is passed, return nothing
   const handlePlayClick = () => {
     setIsMuted(true);
     setShowVideoPlayer(true); // Show the video player when Play is clicked

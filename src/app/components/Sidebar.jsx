@@ -5,7 +5,6 @@ import {
   FaSearch,
   FaBook,
   FaCog,
-  FaCheckCircle,
   FaStar,
   FaUser,
   FaBell,

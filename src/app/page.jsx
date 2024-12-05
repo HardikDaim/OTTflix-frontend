@@ -8,7 +8,7 @@ import Footer from "./components/Footer";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 // import { isAuthenticated } from "./utils/auth";
-import { useRouter } from "next/router";
+// import { useRouter } from "next/router";
 
 // GraphQL queries
 const GET_FEATURED_VIDEO = gql`
