@@ -1,59 +1,10 @@
 "use client";
 import React, { useState, useRef } from "react";
-import { useQuery, gql } from "@apollo/client";
 import { FaVolumeUp, FaVolumeMute, FaInfoCircle, FaPlay } from "react-icons/fa";
 import MovieDetailsModal from "../modals/MovieDetailsModal";
-import VideoPlayer from "../modals/VideoPlayer"
-// GraphQL query to get the featured video
-const GET_FEATURED_VIDEO = gql`
-  query GetFeaturedVideo {
-    getFeaturedVideo {
-      id
-      title
-      description
-      trailerUrl
-      genre
-      thumbnail
-      releaseDate
-      director
-      mainCast
-      duration
-      rating
-    }
-  }
-`;
+import VideoPlayer from "../modals/VideoPlayer";
 
-const GET_MOVIES = gql`
-  query GetMovies {
-    getMovies {
-      id
-      title
-      description
-      trailerUrl
-      genre
-      thumbnail
-      releaseDate
-      director
-      mainCast
-      duration
-      rating
-    }
-  }
-`;
-
-const FeaturedSection = () => {
-  const {
-    loading: loadingFeatured,
-    data: featuredData,
-    error: featuredError,
-  } = useQuery(GET_FEATURED_VIDEO);
-
-  const {
-    loading: loadingMovies,
-    data: moviesData,
-    error: movieError,
-  } = useQuery(GET_MOVIES);
-
+const FeaturedSection = ({ featuredData, moviesData, }) => {
   const [isMuted, setIsMuted] = useState(true); // Mute state for the video
   const videoRef = useRef(null);
   const [selectedMovie, setSelectedMovie] = useState(null);
@@ -68,12 +19,6 @@ const FeaturedSection = () => {
   const closeVideoPlayer = () => {
     setShowVideoPlayer(false); // Hide the video player
   };
-  // Show loading state for each query
-  if (loadingFeatured || loadingMovies) return <div>Loading...</div>;
-
-  // Show error messages for each query
-  if (featuredError || movieError)
-    return <div>Error: {featuredError?.message || movieError?.message}</div>;
 
   // Function to toggle mute/unmute
   const toggleMute = () => {
@@ -86,7 +31,7 @@ const FeaturedSection = () => {
   const handleVideoLoad = () => {
     setIsVideoLoaded(true);
   };
-  
+
   const handleMovieClick = (movie) => {
     setIsMuted(true);
     setSelectedMovie(movie);
@@ -98,14 +43,17 @@ const FeaturedSection = () => {
   };
 
   return (
-    <div className="relative bg-cover bg-center h-[700px] overflow-hidden shadow-lg">
+    <div className="relative bg-cover bg-center h-[500px] lg:h-[700px] overflow-hidden shadow-lg">
       {/* Display the video fetched from getFeaturedVideo */}
       {featuredData?.getFeaturedVideo && (
         <>
           {/* Thumbnail displayed until the video is loaded */}
           {!isVideoLoaded && (
             <img
-              src={featuredData.getFeaturedVideo[0]?.thumbnail || "https://via.placeholder.com/150"}
+              src={
+                featuredData.getFeaturedVideo[0]?.thumbnail ||
+                "https://via.placeholder.com/150"
+              }
               alt="Video Thumbnail"
               className="w-full h-full object-cover absolute top-0 left-0"
             />
@@ -131,10 +79,10 @@ const FeaturedSection = () => {
       {/* Video Content */}
       <div className="absolute inset-0 flex flex-col justify-between pt-8 px-2 text-white">
         <div>
-          <span className="text-green-400 font-bold text-sm mb-2 bg-black bg-opacity-50 p-2">
+          <span className="text-green-400 font-bold text-xs lg:text-sm mb-2 bg-black bg-opacity-50 p-2">
             New Arrivals
           </span>
-          <h1 className="text-8xl font-bold font-roboto my-8">
+          <h1 className="text-3xl md:text-4xl lg:text-8xl font-bold font-roboto my-8">
             {featuredData?.getFeaturedVideo[0]?.title
               .split(" ")
               .map((word, index) => (
@@ -145,24 +93,35 @@ const FeaturedSection = () => {
               )) || "Featured Title"}
           </h1>
 
-          <p className="text-sm mt-2 font-poppins opacity-75">
+          <p className="text-xs lg:text-sm mt-2 font-poppins opacity-75">
             {" "}
-            {featuredData?.getFeaturedVideo[0]?.genre || "New Episodes"}
+            <ul className="flex space-x-4">
+              {featuredData?.getFeaturedVideo[0]?.genres?.map(
+                (genre, index) => (
+                  <li key={index} className="list-disc">
+                    {genre}
+                  </li>
+                )
+              )}
+            </ul>
           </p>
-          <p className="text-sm mt-2 opacity-75 ">
+          <p className="text-xs lg:text-sm mt-2 opacity-75 ">
             {featuredData?.getFeaturedVideo[0]?.description
               .split(" ")
               .map((word, index) => (
                 <React.Fragment key={index}>
                   {word} {(index + 1) % 7 === 0 && <br />}{" "}
-                  {/* Add a line break after every 15 words */}
+                  {/* Add a line break after every 7 words */}
                 </React.Fragment>
               )) || "Description"}
           </p>
           <div className="my-8 space-x-8 flex items-center">
             {/* Play Button with Play Icon */}
-            <button  onClick={handlePlayClick} className="bg-white text-2xl text-black py-2 px-6 font-semibold flex items-center space-x-2">
-              <FaPlay className="text-xl" /> {/* Play icon */}
+            <button
+              onClick={handlePlayClick}
+              className="bg-white text-md lg:text-2xl text-black py-2 px-6 font-semibold flex items-center space-x-2"
+            >
+              <FaPlay /> {/* Play icon */}
               <span>Play</span>
             </button>
 
@@ -171,9 +130,9 @@ const FeaturedSection = () => {
               onClick={() =>
                 handleMovieClick(featuredData?.getFeaturedVideo[0])
               }
-              className="border text-2xl border-white py-2 px-6 text-white font-semibold flex items-center space-x-2"
+              className="border text-md lg:text-2xl border-white py-2 px-6 text-white font-semibold flex items-center space-x-2"
             >
-              <FaInfoCircle className="text-xl" /> {/* Info icon */}
+              <FaInfoCircle /> {/* Info icon */}
               <span>Detail</span>
             </button>
           </div>
@@ -183,7 +142,7 @@ const FeaturedSection = () => {
         <div className="absolute bottom-60 right-0 flex items-center space-x-4">
           <button
             onClick={toggleMute}
-            className="bg-transparent border-2 border-white border-opacity-50 hover:bg-opacity-50 hover:bg-black text-white text-opacity-70 p-3 rounded-full"
+            className="bg-transparent border-2 border-white border-opacity-50 hover:bg-opacity-50 hover:bg-black text-white text-opacity-70 p-3 mr-4 md:mr-0 rounded-full"
           >
             {isMuted ? (
               <FaVolumeMute size={16} /> // Mute icon
@@ -191,7 +150,7 @@ const FeaturedSection = () => {
               <FaVolumeUp size={16} /> // Unmute icon
             )}
           </button>
-          <span className="text-white text-sm bg-black bg-opacity-40 border-l-2 border-white p-2 pr-8">
+          <span className="hidden md:flex text-white text-xs lg:text-sm bg-black bg-opacity-40 border-l-2 border-white p-2 pr-8">
             {featuredData?.getFeaturedVideo[0].rating}
           </span>
         </div>
@@ -218,8 +177,11 @@ const FeaturedSection = () => {
       {selectedMovie && (
         <MovieDetailsModal movie={selectedMovie} onClose={handleCloseModal} />
       )}
-       {showVideoPlayer && (
-        <VideoPlayer videoUrl={featuredData.getFeaturedVideo[0]?.trailerUrl} onClose={closeVideoPlayer} />
+      {showVideoPlayer && (
+        <VideoPlayer
+          videoUrl={featuredData.getFeaturedVideo[0]?.trailerUrl}
+          onClose={closeVideoPlayer}
+        />
       )}
     </div>
   );

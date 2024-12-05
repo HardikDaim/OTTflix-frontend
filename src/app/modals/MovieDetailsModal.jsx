@@ -68,14 +68,14 @@ const MovieDetailsModal = ({ movie, onClose }) => {
 
   return (
     <div
-      className="fixed inset-0 bg-black bg-opacity-60 flex justify-center items-center z-10"
+      className="fixed inset-0 bg-black bg-opacity-80 flex justify-center items-center z-10"
       variants={overlayVariants}
       initial="hidden"
       animate="visible"
       exit="hidden"
     >
       <motion.div
-        className="bg-black border-2 border-gray-500 rounded-lg w-[80%] max-w-5xl overflow-y-auto max-h-[95vh] shadow-lg"
+        className="bg-black border-2 border-gray-500 rounded-lg w-[80%] max-w-5xl overflow-y-auto max-h-[95vh] shadow-lg text-xs"
         variants={modalVariants}
         initial="hidden"
         animate="visible"
@@ -87,7 +87,7 @@ const MovieDetailsModal = ({ movie, onClose }) => {
             <img
               src={movie.thumbnail || "https://via.placeholder.com/400"}
               alt={movie.title}
-              className="w-full h-full object-cover absolute top-0 left-0"
+              className="w-full h-[250px] md:h-[400px] object-cover absolute top-0 left-0"
             />
           )}
 
@@ -97,7 +97,7 @@ const MovieDetailsModal = ({ movie, onClose }) => {
             autoPlay
             loop
             muted={isMuted}
-            className="w-full h-[400px] object-cover"
+            className="w-full h-[250px] md:h-[400px] object-cover"
             onLoadedData={handleVideoLoad} // Triggered when video is ready to play
           />
 
@@ -110,7 +110,7 @@ const MovieDetailsModal = ({ movie, onClose }) => {
 
           <button
             onClick={handlePlayClick}
-            className="absolute bottom-4 left-8 bg-white text-2xl text-black py-2 px-6 font-semibold flex items-center space-x-2 hover:bg-gray-200 transition-colors"
+            className="absolute bottom-4 left-4 md:left-8 bg-white text-sm md:text-2xl text-black py-2 px-6 font-semibold flex items-center space-x-2 hover:bg-gray-200 transition-colors"
           >
             <FaPlay className="text-xl" />
             <span>Play</span>
@@ -125,38 +125,22 @@ const MovieDetailsModal = ({ movie, onClose }) => {
           </button>
         </div>
 
-        <div className="m-8 opacity-75">
+        <div className="m-4 md:m-8 opacity-75">
           <div className="flex justify-between items-center border-b-2 border-gray-700 pb-4 mb-4">
-            <h2 className="text-3xl font-bold text-white">{movie.title}</h2>
+            <h2 className="text-lg md:text-3xl font-bold text-white">
+              {movie.title}
+            </h2>
           </div>
 
-          {/* Movie Description */}
-          <div className="mt-4 text-white">
-            <h3 className="text-xl font-semibold mb-2">Description:</h3>
-            <p className="text-lg">{movie.description}</p>
-          </div>
-
-          {/* Movie Details */}
-          <div className="mt-6 text-white">
-            <div className="mb-2">
-              <strong className="font-semibold">Genre:</strong> {movie.genre}
-            </div>
-            <div className="mb-2">
-              <strong className="font-semibold">Release Date:</strong>{" "}
-              {movie.releaseDate || "N/A"}
-            </div>
-            <div className="mb-2">
-              <strong className="font-semibold">Director:</strong>{" "}
-              {movie.director || "N/A"}
-            </div>
-
-            {/* Main Cast - Display as bulleted points */}
-            {movie.mainCast && movie.mainCast.length > 0 && (
-              <div className="mb-2">
-                <strong className="font-semibold">Main Cast:</strong>
-                <ul className="list-disc pl-5 mt-2">
+          {/* Main Cast */}
+          {movie.mainCast && movie.mainCast.length > 0 && (
+              <div className="mb-4">
+                <strong className="font-semibold text-md md:text-lg">
+                  Main Cast:
+                </strong>
+                <ul className="list-disc pl-5 space-y-1 mt-2">
                   {movie.mainCast.map((castMember, index) => (
-                    <li key={index} className="text-lg">
+                    <li key={index} className="text-sm md:text-base">
                       {castMember}
                     </li>
                   ))}
@@ -164,22 +148,127 @@ const MovieDetailsModal = ({ movie, onClose }) => {
               </div>
             )}
 
-            <div className="mb-2">
-              <strong className="font-semibold">Duration:</strong>{" "}
-              {movie.duration ? `${movie.duration} minutes` : "N/A"}
-            </div>
+          {/* Movie Description */}
+          <div className="mt-4 text-white">
+            <h3 className="text-md md:text-xl font-semibold mb-2">
+              Description:
+            </h3>
+            <p className="text-xs md:text-lg">{movie.description}</p>
           </div>
 
-          {/* Watch Now Button */}
-          <div className="mt-6 flex items-center justify-center">
-            <a
-              href={movie.trailerUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="bg-indigo-600 text-white py-3 px-8 rounded-full text-lg hover:bg-indigo-700 transition-colors"
-            >
-              Watch Now
-            </a>
+          {/* Movie Synopsis */}
+          <div className="mt-4 text-white">
+            <h3 className="text-md md:text-xl font-semibold mb-2">Synopsis:</h3>
+            <p className="text-xs md:text-lg">{movie.synopsis}</p>
+          </div>
+
+          {/* Movie Details */}
+          <div className="mt-6 text-white text-xs md:text-lg">
+            {/* Genres */}
+            <div className="mb-4">
+              <strong className="font-semibold text-md md:text-lg">
+                Genres:
+              </strong>
+              <ul className="list-disc pl-5 space-y-1 mt-2">
+                {movie.genres?.map((genre, index) => (
+                  <li key={index} className="text-sm md:text-base">
+                    {genre}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Release Date */}
+            <div className="mb-4">
+              <strong className="font-semibold text-md md:text-lg">
+                Release Date:
+              </strong>{" "}
+              {movie.releaseDate || "N/A"}
+            </div>
+
+            {/* Movie Language */}
+            <div className="mb-4">
+              <strong className="font-semibold text-md md:text-lg">
+                Movie Language:
+              </strong>{" "}
+              {movie.language || "N/A"}
+            </div>
+
+            {/* Movie Country */}
+            <div className="mb-4">
+              <strong className="font-semibold text-md md:text-lg">
+                Movie Country:
+              </strong>{" "}
+              {movie.country || "N/A"}
+            </div>
+
+            {/* Awards */}
+            <div className="mb-4">
+              <strong className="font-semibold text-md md:text-lg">
+                Awards:
+              </strong>
+              <ul className="list-disc pl-5 space-y-1 mt-2">
+                {movie.awards?.map((award, index) => (
+                  <li key={index} className="text-sm md:text-base">
+                    {award}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Tags */}
+            <div className="mb-4">
+              <strong className="font-semibold text-md md:text-lg">
+                Tags:
+              </strong>
+              <ul className="list-disc pl-5 space-y-1 mt-2">
+                {movie.tags?.map((tag, index) => (
+                  <li key={index} className="text-sm md:text-base">
+                    {tag}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Production Companies */}
+            <div className="mb-4">
+              <strong className="font-semibold text-md md:text-lg">
+                Production Companies:
+              </strong>
+              <ul className="list-disc pl-5 space-y-1 mt-2">
+                {movie.productionCompanies?.map((productionCompany, index) => (
+                  <li key={index} className="text-sm md:text-base">
+                    {productionCompany}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Director */}
+            <div className="mb-4">
+              <strong className="font-semibold text-md md:text-lg">
+                Director:
+              </strong>{" "}
+              {movie.director || "N/A"}
+            </div>
+
+            
+
+            {/* Rating */}
+            <div className="mb-4">
+              <strong className="font-semibold text-md md:text-lg">
+                Rating:
+              </strong>{" "}
+              {movie.rating ? `${movie.rating}` : "N/A"}
+            </div>
+
+            {/* Duration */}
+            <div className="mb-4">
+              <strong className="font-semibold text-md md:text-lg">
+                Duration:
+              </strong>{" "}
+              {movie.duration ? `${movie.duration} minutes` : "N/A"}
+            </div>
           </div>
         </div>
       </motion.div>
