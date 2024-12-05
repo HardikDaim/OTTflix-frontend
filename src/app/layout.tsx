@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import ApolloProviderWrapper from "./ApolloProvider";
 import './globals.css';
+import Head from 'next/head';
 
 export default function RootLayout({
   children,
@@ -17,11 +18,18 @@ export default function RootLayout({
   if (!isClient) return null;
 
   return (
-    <html lang="en">
-      <body
-      >
-        <ApolloProviderWrapper>{children}</ApolloProviderWrapper>
-      </body>
-    </html>
+    <>
+      <Head> 
+        {/* Title */}
+        <title>OTTflix - Your Ultimate Streaming Platform</title>
+        <meta name="description" content="Stream the best movies and TV shows at OTTFLIX." />
+        <meta name="keywords" content="movies, tv shows, streaming, ottflix" />
+      </Head>
+      <html lang="en">
+        <body>
+          <ApolloProviderWrapper>{children}</ApolloProviderWrapper>
+        </body>
+      </html>
+    </>
   );
 }
