@@ -1,5 +1,6 @@
 "use client"
 import React from "react";
+import { motion } from 'framer-motion';
 import {
   FaHome,
   FaSearch,
@@ -16,7 +17,14 @@ const Sidebar = () => {
     <div className="fixed z-20 hidden lg:flex lg:flex-col lg:w-24 bg-black bg-opacity-50 px-0 py-2 justify-between text-gray-400 h-full">
       {/* Top Icon */}
       <Link href="/" className="flex justify-center">
-        <img className="w-full h-full" src="/logo-rem.png" alt="OTTflix" />
+        <motion.img className="w-full h-full" src="/logo-rem.png" alt="OTTflix" initial={{ opacity: 1, scale: 1 }}
+      animate={{ scale: 1.2 }} // Scaling the logo up
+      transition={{
+        duration: 1, // Duration for scaling
+        repeat: Infinity, // Infinite loop
+        repeatType: "reverse", // Reverse the scaling animation (shrink back)
+        ease: "easeInOut", // Smooth transition in and out
+      }} />
       </Link>
 
       {/* Navigation Buttons */}

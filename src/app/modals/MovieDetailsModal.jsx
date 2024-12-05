@@ -74,7 +74,7 @@ const MovieDetailsModal = ({ movie, onClose }) => {
       exit="hidden"
     >
       <motion.div
-        className="bg-black border-2 border-gray-500 rounded-lg w-[80%] max-w-5xl overflow-y-auto max-h-[95vh] shadow-lg text-xs"
+        className="bg-black border-2 border-gray-500 rounded-lg w-[95%] md:w-[70%] lg:w-[50%] overflow-y-auto max-h-[95vh] shadow-lg text-xs"
         variants={modalVariants}
         initial="hidden"
         animate="visible"
@@ -84,7 +84,7 @@ const MovieDetailsModal = ({ movie, onClose }) => {
         <div className="mb-6 relative">
           {!isVideoLoaded && (
             <img
-              src={movie.thumbnail || "https://via.placeholder.com/400"}
+              src={movie.thumbnail}
               alt={movie.title}
               className="w-full h-[250px] md:h-[400px] object-cover absolute top-0 left-0"
             />

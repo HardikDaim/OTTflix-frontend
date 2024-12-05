@@ -1,16 +1,25 @@
 "use client";
 import React from "react";
+import { motion } from 'framer-motion';
 
 const Footer = () => {
   return (
     <footer className="bg-gray-900 bg-opacity-75 text-white p-6 text-center mt-6 text-xs md:text-sm">
       {/* Logo and Platform Name */}
       <div className="mb-6">
-        <img
-          src="/logo-rem.png" // Replace with the path to your platform logo
-          alt="OTTFLIX"
-          className="mx-auto h-24 md:h-40"
-        />
+      <motion.img
+      src="/logo-rem.png" // Replace with the path to your platform logo
+      alt="OTTflix"
+      className="mx-auto h-40"
+      initial={{ opacity: 1, scale: 1 }}
+      animate={{ scale: 1.2 }} // Scaling the logo up
+      transition={{
+        duration: 1, // Duration for scaling
+        repeat: Infinity, // Infinite loop
+        repeatType: "reverse", // Reverse the scaling animation (shrink back)
+        ease: "easeInOut", // Smooth transition in and out
+      }}
+    />
       </div>
 
       {/* Navigation Links */}

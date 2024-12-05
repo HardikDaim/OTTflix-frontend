@@ -113,8 +113,11 @@ const Home = () => {
         {loadingFeatured ? (
           // Skeleton for FeaturedSection
           <div className="mb-6">
-            <Skeleton height="700px" width="100%" className="rounded-lg" />
-          </div>
+            <Skeleton
+               width="100%"
+               className="h-[500px] lg:h-[700px] rounded-lg"
+              />          
+              </div>
         ) : (
           <FeaturedSection
             featuredData={featuredData}
@@ -124,8 +127,8 @@ const Home = () => {
 
         {loadingMovies ? (
           // Skeleton for HindiMovies section
-          <div className="mt-6">
-            <Skeleton height={30} width="12%" className="rounded-lg mb-4" />
+          <div className="mt-8 px-2">
+            <Skeleton height={30} className="rounded-lg mb-4" />
             <div className="flex space-x-4 overflow-x-scroll">
               {[...Array(10)].map((_, index) => (
                 <div key={index}>
@@ -144,8 +147,8 @@ const Home = () => {
 
         {loadingMovies ? (
           // Skeleton for English Movies section
-          <div className="mt-6">
-            <Skeleton height={30} width="12%" className="rounded-lg mb-4" />
+          <div className="mt-8 px-2">
+            <Skeleton height={30} className="rounded-lg mb-4" />
             <div className="flex space-x-4 overflow-x-scroll">
               {[...Array(10)].map((_, index) => (
                 <div key={index}>
