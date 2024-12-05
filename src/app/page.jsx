@@ -77,10 +77,11 @@ const Home = () => {
     error: movieError,
   } = useQuery(GET_MOVIES);
 
-  // Error handling
   if (featuredError || movieError) {
-    return <div>Error: {featuredError?.message || movieError?.message}</div>;
+    // Log the error to the console for debugging purposes
+    console.error('Error fetching movies:', featuredError || movieError);
   }
+  
 
   // Filter Hindi movies
   const hindiMovies = moviesData?.getMovies?.filter((movie) =>

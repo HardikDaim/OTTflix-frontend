@@ -3,6 +3,8 @@
 import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 
 const graphqlUri = process.env.NEXT_PUBLIC_GRAPHQL_URI;
+console.log('GraphQL URI:', graphqlUri);
+
 
 const client = new ApolloClient({
   uri: graphqlUri,  
