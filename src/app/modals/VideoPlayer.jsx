@@ -179,7 +179,7 @@ const VideoPlayer = ({ videoUrl, onClose }) => {
         ref={containerRef}
       >
         <motion.div
-          className={`relative ${isFullscreen ? "w-full h-full" : "w-full max-w-7xl h-[80%]"} bg-black rounded-lg overflow-hidden`} 
+          className={`relative ${isFullscreen ? "w-full h-full" : "w-full max-w-5xl lg:max-w-4xl h-[80%]"} bg-black rounded-lg overflow-hidden`} 
           initial={{ opacity: 0, y: "100%" }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: "100%" }}
@@ -188,7 +188,7 @@ const VideoPlayer = ({ videoUrl, onClose }) => {
           ref={containerRef}
         >
            {closeButtonVisible && (
-            <button onClick={onClose} className="absolute top-4 left-4 text-white text-4xl hover:text-red-600 transition-duration duration-300 z-30">
+            <button onClick={onClose} className="absolute top-4 left-4  text-4xl text-red-600 transition-duration duration-300 z-30">
               <FaArrowLeft />
             </button>
           )}

@@ -74,7 +74,7 @@ const MovieDetailsModal = ({ movie, onClose }) => {
       exit="hidden"
     >
       <motion.div
-        className="bg-black border-2 border-gray-500 rounded-lg w-[95%] md:w-[70%] lg:w-[50%] overflow-y-auto max-h-[95vh] shadow-lg text-xs"
+        className="bg-black border-2 border-gray-500 rounded-lg w-[95%] md:w-[70%] lg:w-[50%] overflow-y-auto max-h-[85vh] md:max-h-[95vh] shadow-lg text-xs"
         variants={modalVariants}
         initial="hidden"
         animate="visible"
@@ -104,7 +104,7 @@ const MovieDetailsModal = ({ movie, onClose }) => {
             onClick={onClose}
             className="absolute top-4 right-4 bg-black p-2 rounded-full bg-opacity-50 hover:bg-opacity-80 text-white hover:text-red-500 transition-colors"
           >
-            <FaTimes />
+            <FaTimes className="text-lg" />
           </button>
 
           <button
@@ -120,7 +120,7 @@ const MovieDetailsModal = ({ movie, onClose }) => {
             onClick={toggleMute}
             className="absolute bottom-4 right-4 text-white bg-black bg-opacity-50 p-2 rounded-full hover:bg-opacity-80 transition-colors"
           >
-            {isMuted ? <FaVolumeMute /> : <FaVolumeUp />}
+            {isMuted ? <FaVolumeMute className="text-lg" /> : <FaVolumeUp className="text-lg" />}
           </button>
         </div>
 
