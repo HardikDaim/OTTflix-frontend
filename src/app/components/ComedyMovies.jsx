@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import MovieDetailsModal from "../modals/MovieDetailsModal";
 
-const EnglishMovies = ({ moviesData }) => {
+const HindiActionMovies = ({ moviesData }) => {
   const [selectedMovie, setSelectedMovie] = useState(null);
 
   const handleMovieClick = (movie) => {
@@ -20,7 +20,7 @@ const EnglishMovies = ({ moviesData }) => {
       ) : (
         <div className="mt-8 px-2">
           <h2 className="text-2xl font-semibold text-white mb-4">
-            Amazing English Movies
+            Best Comedy Movies
           </h2>
           <div className="mt-0 overflow-x-scroll scrollbar-hide">
             <div className="flex space-x-4">
@@ -39,7 +39,7 @@ const EnglishMovies = ({ moviesData }) => {
                   </div>
                 ))
               ) : (
-                <p className="text-gray-400">No English movies available.</p>
+                <p className="text-gray-400">No Comedy movies available.</p>
               )}
             </div>
           </div>
@@ -55,4 +55,4 @@ const EnglishMovies = ({ moviesData }) => {
   );
 };
 
-export default EnglishMovies;
+export default HindiActionMovies;
