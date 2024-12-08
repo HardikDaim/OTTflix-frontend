@@ -50,6 +50,7 @@ const Footer = () => {
       {/* Copyright Notice */}
       <div className="mt-4">
         <p>&copy; {new Date().getFullYear()} Your OTTflix. All Rights Reserved.</p>
+        <p>Version: 1.0.0</p>
       </div>
     </footer>
   );

@@ -26,8 +26,7 @@ const VideoPlayer = ({ videoUrl, onClose }) => {
   const [controlsVisible, setControlsVisible] = useState(true);
   const [closeButtonVisible, setCloseButtonVisible] = useState(true);
   const [showSettings, setShowSettings] = useState(false);
-  const [selectedQuality, setSelectedQuality] = useState("1080p"); 
-  const [subtitlesEnabled, setSubtitlesEnabled] = useState(false);
+  const [selectedQuality, setSelectedQuality] = useState("1080p");
   const mouseTimerRef = useRef(null);
 
   const playerRef = useRef(null);
@@ -73,7 +72,8 @@ const VideoPlayer = ({ videoUrl, onClose }) => {
     };
 
     document.addEventListener("fullscreenchange", handleFullscreenChange);
-    return () => document.removeEventListener("fullscreenchange", handleFullscreenChange);
+    return () =>
+      document.removeEventListener("fullscreenchange", handleFullscreenChange);
   }, []);
 
   useEffect(() => {
@@ -92,9 +92,16 @@ const VideoPlayer = ({ videoUrl, onClose }) => {
   const handleBufferEnd = () => setIsLoading(false);
 
   const formatTime = (seconds) => {
-    const minutes = Math.floor(seconds / 60);
+    const hours = Math.floor(seconds / 3600);
+    const minutes = Math.floor((seconds % 3600) / 60);
     const remainingSeconds = Math.floor(seconds % 60);
-    return `${minutes}:${remainingSeconds < 10 ? "0" : ""}${remainingSeconds}`;
+
+    const formattedHours = hours > 0 ? `${hours}:` : "";
+    const formattedMinutes = minutes > 0 ? `${minutes}:` : "00:";
+    const formattedSeconds =
+      remainingSeconds < 10 ? `0${remainingSeconds}` : remainingSeconds;
+
+    return `${formattedHours}${formattedMinutes}${formattedSeconds}`;
   };
 
   const hideControlsAndCursor = () => {
@@ -120,7 +127,10 @@ const VideoPlayer = ({ videoUrl, onClose }) => {
       mouseTimerRef.current = setTimeout(hideControlsAndCursor, 3000);
 
       return () => {
-        containerRef.current.removeEventListener("mousemove", showControlsAndCursor);
+        containerRef.current.removeEventListener(
+          "mousemove",
+          showControlsAndCursor
+        );
         if (mouseTimerRef.current) clearTimeout(mouseTimerRef.current);
       };
     }
@@ -158,14 +168,11 @@ const VideoPlayer = ({ videoUrl, onClose }) => {
 
   const handleVideoClick = () => togglePlayPause();
   const toggleSettings = () => setShowSettings(!showSettings);
-  
+
   const changeQuality = (quality) => {
     setSelectedQuality(quality);
     setShowSettings(false);
-    playerRef.current.seekTo(0, "seconds");
   };
-
-  const toggleSubtitles = () => setSubtitlesEnabled(!subtitlesEnabled);
 
   return (
     <AnimatePresence>
@@ -179,7 +186,11 @@ const VideoPlayer = ({ videoUrl, onClose }) => {
         ref={containerRef}
       >
         <motion.div
-          className={`relative ${isFullscreen ? "w-full h-full" : "w-full max-w-5xl lg:max-w-4xl h-[80%]"} bg-black rounded-lg overflow-hidden`} 
+          className={`relative ${
+            isFullscreen
+              ? "w-full h-full"
+              : "w-full max-w-5xl lg:max-w-4xl h-[80%]"
+          } bg-black rounded-lg overflow-hidden`}
           initial={{ opacity: 0, y: "100%" }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: "100%" }}
@@ -187,12 +198,25 @@ const VideoPlayer = ({ videoUrl, onClose }) => {
           onMouseMove={() => setControlsVisible(true)}
           ref={containerRef}
         >
-           {closeButtonVisible && (
-            <button onClick={onClose} className="absolute top-4 left-4  text-4xl text-red-600 transition-duration duration-300 z-30">
+          <div className="absolute top-16 right-12 ">
+            <div className="flex items-center justify-center -space-x-2 opacity-60">
+              <img src="/logo-rem.png" className="h-16 w-16" />
+              <h4 className="font-bold font-roboto">OTTflix</h4>
+            </div>
+          </div>
+          {closeButtonVisible && (
+            <button
+              onClick={onClose}
+              className="absolute top-4 left-4  text-4xl text-[#ff0000] transition-duration duration-300 z-30"
+            >
               <FaArrowLeft />
             </button>
           )}
-          <div className="absolute w-full h-[77%] z-10 top-0 left-0" onClick={handleVideoClick}></div>
+
+          <div
+            className="absolute w-full h-[77%] z-10 top-0 left-0"
+            onClick={handleVideoClick}
+          ></div>
 
           {isLoading && (
             <div className="absolute inset-0 flex justify-center items-center bg-black bg-opacity-50">
@@ -202,7 +226,7 @@ const VideoPlayer = ({ videoUrl, onClose }) => {
 
           <ReactPlayer
             ref={playerRef}
-            url={`${videoUrl}?quality=${selectedQuality}&subtitles=${subtitlesEnabled ? "enabled" : "disabled"}`}
+            url={`${videoUrl}`}
             playing={isPlaying}
             controls={false}
             muted={isMuted}
@@ -217,7 +241,9 @@ const VideoPlayer = ({ videoUrl, onClose }) => {
           />
 
           <div
-            className={`absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-black to-transparent transition-opacity duration-300 z-30 ${controlsVisible ? "opacity-100" : "opacity-0"}`}
+            className={`absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-black to-transparent transition-opacity duration-300 z-30 ${
+              controlsVisible ? "opacity-100" : "opacity-0"
+            }`}
           >
             <div className="w-full mb-2 flex items-center">
               <input
@@ -225,9 +251,13 @@ const VideoPlayer = ({ videoUrl, onClose }) => {
                 min="0"
                 max="100"
                 value={progress}
-                onChange={(e) => playerRef.current.seekTo((e.target.value / 100) * duration)}
+                onChange={(e) =>
+                  playerRef.current.seekTo((e.target.value / 100) * duration)
+                }
                 className="w-full h-1 cursor-pointer rounded-lg overflow-hidden appearance-none"
-                style={{ background: `linear-gradient(to right, red ${progress}%, gray ${progress}%)` }}
+                style={{
+                  background: `linear-gradient(to right, red ${progress}%, gray ${progress}%)`,
+                }}
               />
               <span className="ml-2 text-white text-sm">
                 {formatTime(duration - currentTime)}
@@ -261,11 +291,36 @@ const VideoPlayer = ({ videoUrl, onClose }) => {
             </div>
             <div className="flex justify-between items-center">
               <div className="flex items-center space-x-4 text-white">
-                <button className="text-4xl hover:text-red-600 transition-duration duration-300"  onClick={togglePlayPause}>{isPlaying ? <FaPause /> : <FaPlay />}</button>
-                <button className="text-4xl hover:text-red-600 transition-duration duration-300" onClick={handleSeekBackward}><RiReplay10Fill /></button>
-                <button className="text-4xl hover:text-red-600 transition-duration duration-300" onClick={handleSeekForward}><RiForward10Line /></button>
-                <button className="text-4xl hover:text-red-600 transition-duration duration-300" onClick={toggleMute}>{isMuted ? <FaVolumeMute /> : <FaVolumeUp />}</button>
-                <button className="text-4xl hover:text-red-600 transition-duration duration-300" onClick={toggleSettings}><FaCog /></button>
+                <button
+                  className="text-4xl hover:text-red-600 transition-duration duration-300"
+                  onClick={togglePlayPause}
+                >
+                  {isPlaying ? <FaPause /> : <FaPlay />}
+                </button>
+                <button
+                  className="text-4xl hover:text-red-600 transition-duration duration-300"
+                  onClick={handleSeekBackward}
+                >
+                  <RiReplay10Fill />
+                </button>
+                <button
+                  className="text-4xl hover:text-red-600 transition-duration duration-300"
+                  onClick={handleSeekForward}
+                >
+                  <RiForward10Line />
+                </button>
+                <button
+                  className="text-4xl hover:text-red-600 transition-duration duration-300"
+                  onClick={toggleMute}
+                >
+                  {isMuted ? <FaVolumeMute /> : <FaVolumeUp />}
+                </button>
+                <button
+                  className="text-4xl hover:text-red-600 transition-duration duration-300"
+                  onClick={toggleSettings}
+                >
+                  <FaCog />
+                </button>
                 {showSettings && (
                   <motion.div
                     initial={{ opacity: 0, y: 20 }}
@@ -273,18 +328,14 @@ const VideoPlayer = ({ videoUrl, onClose }) => {
                     exit={{ opacity: 0, y: 20 }}
                     className="absolute bottom-24 left-56 p-4 bg-black text-white rounded-lg shadow-lg"
                   >
-                    <label className="flex items-center space-x-2">
-                      <input
-                        type="checkbox"
-                        checked={subtitlesEnabled}
-                        onChange={toggleSubtitles}
-                      />
-                      <span>Enable Subtitles</span>
-                    </label>
-                    <div className="mt-4">
+                    <div>
                       <h3 className="text-sm">Quality</h3>
-                      {["1080p","720p", "480p", "360p"].map((quality) => (
-                        <div key={quality} className="flex items-center space-x-2 mt-1">
+                      {["1080p", "720p", "480p", "360p"].map((quality) => (
+                        <div
+                          key={quality}
+                          onClick={() => setSelectedQuality(quality)}
+                          className="flex items-center space-x-2 mt-1"
+                        >
                           <input
                             type="radio"
                             name="quality"
@@ -292,14 +343,17 @@ const VideoPlayer = ({ videoUrl, onClose }) => {
                             checked={selectedQuality === quality}
                             onChange={() => changeQuality(quality)}
                           />
-                          <span>{quality}</span>
+                          <span className="cursor-pointer">{quality}</span>
                         </div>
                       ))}
                     </div>
                   </motion.div>
                 )}
               </div>
-              <button onClick={toggleFullscreen} className="text-white text-4xl hover:text-red-600 transition-duration duration-300">
+              <button
+                onClick={toggleFullscreen}
+                className="text-white text-4xl hover:text-red-600 transition-duration duration-300"
+              >
                 {isFullscreen ? <FaCompress /> : <FaExpand />}
               </button>
             </div>

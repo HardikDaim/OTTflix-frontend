@@ -53,7 +53,7 @@ const Sidebar = () => {
 
       {/* Bottom Icon */}
       <div className="flex justify-center">
-        <FaStar className="text-yellow-400" size={20} />
+        <FaStar className="text-yellow-400 hidden" size={20} />
       </div>
     </div>
   );

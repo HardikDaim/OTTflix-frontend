@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import ApolloProviderWrapper from "./ApolloProvider";
 import "./globals.css";
 import Head from "next/head";
-import { metadata } from '../../metadata';
+import { metadata } from './MetaData';
 
 export default function RootLayout({
   children,
