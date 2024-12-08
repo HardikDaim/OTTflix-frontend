@@ -198,7 +198,7 @@ const VideoPlayer = ({ videoUrl, onClose }) => {
           onMouseMove={() => setControlsVisible(true)}
           ref={containerRef}
         >
-          <div className="absolute top-16 right-12 ">
+          <div className="absolute top-12 md:top-16 right-16 md:right-12 ">
             <div className="flex items-center justify-center -space-x-2 opacity-60">
               <img src="/logo-rem.png" className="h-16 w-16" />
               <h4 className="font-bold font-roboto">OTTflix</h4>
