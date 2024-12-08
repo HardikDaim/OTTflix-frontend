@@ -122,6 +122,8 @@ const Home = () => {
 
 
   return (
+    <>
+ 
     <SkeletonTheme baseColor="#2d2d2d" highlightColor="#3c3c3c">
       <div className="min-h-screen bg-black text-white">
         {/* Sidebar */}
@@ -286,6 +288,7 @@ const Home = () => {
       </div>
       <Footer />
     </SkeletonTheme>
+    </>
   );
 };
 
