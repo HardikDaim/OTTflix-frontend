@@ -108,7 +108,7 @@ const FeaturedSection = ({ featuredData, moviesData }) => {
 
           <div className="text-xs lg:text-sm mt-2 font-poppins opacity-75">
             {" "}
-            <ul className="flex space-x-4">
+            <ul className="flex space-x-6">
               {featuredData?.getFeaturedVideo[0]?.genres?.map(
                 (genre, index) => (
                   <li key={index} className="list-disc">
@@ -126,7 +126,7 @@ const FeaturedSection = ({ featuredData, moviesData }) => {
                   {word} {(index + 1) % 7 === 0 && <br />}{" "}
                   {/* Add a line break after every 7 words */}
                 </React.Fragment>
-              )) || "Description"}
+              ))}
           </p>
           <div className="my-8 space-x-8 flex items-center">
             {/* Play Button with Play Icon */}
