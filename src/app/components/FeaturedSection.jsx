@@ -95,7 +95,7 @@ const FeaturedSection = ({ featuredData, moviesData }) => {
           <span className="text-green-400 font-bold text-xs lg:text-sm mb-2 bg-black bg-opacity-50 p-2">
             New Arrivals
           </span>
-          <h1 className="text-3xl md:text-4xl lg:text-8xl font-bold font-roboto my-8">
+          <h1 className="text-3xl md:text-4xl lg:text-8xl font-bold font-roboto my-4 md:my-8">
             {featuredData?.getFeaturedVideo[0]?.title
               .split(" ")
               .map((word, index) => (
