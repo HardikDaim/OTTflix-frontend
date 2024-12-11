@@ -108,7 +108,7 @@ const FeaturedSection = ({ featuredData, moviesData }) => {
 
           <div className="text-xs lg:text-sm mt-2 font-poppins opacity-75">
             {" "}
-            <ul className="flex space-x-6">
+            <ul className="flex space-x-4">
               {featuredData?.getFeaturedVideo[0]?.genres?.map(
                 (genre, index) => (
                   <li key={index} className="list-disc">
@@ -152,7 +152,7 @@ const FeaturedSection = ({ featuredData, moviesData }) => {
         </div>
 
         {/* Mute/Unmute Button */}
-        <div className="absolute bottom-[10.5rem] md:bottom-40 lg:bottom-60 right-0 flex items-center space-x-4">
+        <div className="absolute bottom-[11rem] md:bottom-40 lg:bottom-60 right-0 flex items-center space-x-4">
           <button
             onClick={toggleMute}
             className="bg-transparent border-2 border-white border-opacity-50 hover:bg-opacity-50 hover:bg-black text-white text-opacity-70 p-3 mr-4 md:mr-0 rounded-full"
