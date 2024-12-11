@@ -3,13 +3,26 @@ import React, { useState, useRef } from "react";
 import { FaVolumeUp, FaVolumeMute, FaInfoCircle, FaPlay } from "react-icons/fa";
 import MovieDetailsModal from "../modals/MovieDetailsModal";
 import VideoPlayer from "../modals/VideoPlayer";
+import Skeleton from "react-loading-skeleton";
 
-const FeaturedSection = ({ featuredData, moviesData, }) => {
+const FeaturedSection = ({ featuredData, moviesData }) => {
   const [isMuted, setIsMuted] = useState(true); // Mute state for the video
   const videoRef = useRef(null);
   const [selectedMovie, setSelectedMovie] = useState(null);
   const [isVideoLoaded, setIsVideoLoaded] = useState(false);
   const [showVideoPlayer, setShowVideoPlayer] = useState(false);
+  const scrollRef = useRef(null);
+
+  const scroll = (direction) => {
+    const { current } = scrollRef;
+    if (current) {
+      if (direction === "left") {
+        current.scrollLeft -= 1000;
+      } else {
+        current.scrollLeft += 1000;
+      }
+    }
+  };
 
   const handlePlayClick = () => {
     setIsMuted(true);
@@ -43,7 +56,7 @@ const FeaturedSection = ({ featuredData, moviesData, }) => {
   };
 
   return (
-    <div className="relative bg-cover bg-center h-[500px] lg:h-[700px] overflow-hidden shadow-lg">
+    <div className="relative select-none bg-cover bg-center h-[500px] lg:h-[700px] overflow-hidden shadow-lg">
       {/* Display the video fetched from getFeaturedVideo */}
       {featuredData?.getFeaturedVideo && (
         <>
@@ -90,10 +103,10 @@ const FeaturedSection = ({ featuredData, moviesData, }) => {
                   {word}
                   <br />
                 </React.Fragment>
-              )) || "Featured Title"}
+              ))}
           </h1>
 
-          <p className="text-xs lg:text-sm mt-2 font-poppins opacity-75">
+          <div className="text-xs lg:text-sm mt-2 font-poppins opacity-75">
             {" "}
             <ul className="flex space-x-4">
               {featuredData?.getFeaturedVideo[0]?.genres?.map(
@@ -104,7 +117,7 @@ const FeaturedSection = ({ featuredData, moviesData, }) => {
                 )
               )}
             </ul>
-          </p>
+          </div>
           <p className="text-xs lg:text-sm mt-2 opacity-75 ">
             {featuredData?.getFeaturedVideo[0]?.description
               .split(" ")
@@ -139,7 +152,7 @@ const FeaturedSection = ({ featuredData, moviesData, }) => {
         </div>
 
         {/* Mute/Unmute Button */}
-        <div className="absolute bottom-60 right-0 flex items-center space-x-4">
+        <div className="absolute bottom-[10.5rem] md:bottom-40 lg:bottom-60 right-0 flex items-center space-x-4">
           <button
             onClick={toggleMute}
             className="bg-transparent border-2 border-white border-opacity-50 hover:bg-opacity-50 hover:bg-black text-white text-opacity-70 p-3 mr-4 md:mr-0 rounded-full"
@@ -154,10 +167,53 @@ const FeaturedSection = ({ featuredData, moviesData, }) => {
             {featuredData?.getFeaturedVideo[0].rating}
           </span>
         </div>
+        <div className="relative group">
+          {/* Left Scroll Button */}
+          <button
+            onClick={() => scroll("left")}
+            className="absolute hidden md:block left-0 top-1/2 transform -translate-y-1/2 z-10 bg-gradient-to-r from-black to-transparent h-full text-white p-1 shadow-lg hover:shadow-xl hover:scale-110 focus:outline-none opacity-0 group-hover:opacity-100 transition-all duration-300 ease-in-out"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth="2"
+              stroke="currentColor"
+              className="w-6 h-6 md:w-8 md:h-8"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M15 19l-7-7 7-7"
+              />
+            </svg>
+          </button>
+          {/* Right Scroll Button */}
+          <button
+            onClick={() => scroll("right")}
+            className="absolute hidden md:block right-0 top-1/2 transform -translate-y-1/2 z-10 bg-gradient-to-l from-black to-transparent h-full text-white p-1 shadow-lg hover:shadow-xl hover:scale-110 focus:outline-none opacity-0 group-hover:opacity-100 transition-all duration-300 ease-in-out"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth="2"
+              stroke="currentColor"
+              className="w-6 h-6 md:w-8 md:h-8"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M9 5l7 7-7 7"
+              />
+            </svg>
+          </button>
 
-        {/* Movie Cards */}
-        <div className="mt-0">
-          <div className="flex space-x-4 overflow-x-scroll scrollbar-hide">
+          {/* Movie Cards */}
+          <div
+            ref={scrollRef}
+            className="flex space-x-4 overflow-x-scroll scrollbar-hide scroll-smooth"
+          >
             {moviesData?.getMovies.map((movie) => (
               <div
                 key={movie.id}
@@ -165,9 +221,9 @@ const FeaturedSection = ({ featuredData, moviesData, }) => {
                 onClick={() => handleMovieClick(movie)}
               >
                 <img
-                  src={movie.thumbnail || "https://via.placeholder.com/150"}
+                  src={movie.thumbnail}
                   alt={movie.title}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover rounded-lg"
                 />
               </div>
             ))}

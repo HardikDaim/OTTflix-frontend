@@ -9,6 +9,7 @@ import AdventureMovies from "./components/AdventureMovies";
 import RecentMovies from "./components/RecentMovies";
 import ComedyMovies from "./components/ComedyMovies";
 import ActionMovies from "./components/ActionMovies";
+import MobileNavigation from "./components/MobileNavigation";
 import Footer from "./components/Footer";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
@@ -114,180 +115,177 @@ const Home = () => {
   const adventureMovies = moviesData?.getMovies?.filter((movie) =>
     movie.genres?.includes("Adventure")
   );
-  
-   // Filter by Release Date (last year)
-   const recentMovies = moviesData?.getMovies?.filter((movie) =>
-    new Date(movie.releaseDate) > new Date(new Date().setFullYear(new Date().getFullYear() - 1))
-  );
 
+  // Filter by Release Movies
+  const recentMovies = moviesData?.getMovies;
 
   return (
     <>
- 
-    <SkeletonTheme baseColor="#2d2d2d" highlightColor="#3c3c3c">
-      <div className="min-h-screen bg-black text-white">
-        {/* Sidebar */}
-        <Sidebar />
+      <SkeletonTheme baseColor="#2d2d2d" highlightColor="#3c3c3c">
+        <div className="min-h-screen bg-black text-white">
+          {/* Sidebar */}
+          <Sidebar />
+          <MobileNavigation />
 
-        {/* Main content */}
-        <div className="flex-1 lg:ml-24">
-          {loadingFeatured ? (
-            // Skeleton for FeaturedSection
-            <div className="mb-6">
-              <Skeleton
-                width="100%"
-                className="h-[500px] lg:h-[700px] rounded-lg"
+          {/* Main content */}
+          <div className="flex-1 lg:ml-24">
+            {loadingFeatured ? (
+              // Skeleton for FeaturedSection
+              <div className="mb-6">
+                <Skeleton
+                  width="100%"
+                  className="h-[500px] lg:h-[700px] rounded-lg"
+                />
+              </div>
+            ) : (
+              <FeaturedSection
+                featuredData={featuredData}
+                moviesData={moviesData}
               />
-            </div>
-          ) : (
-            <FeaturedSection
-              featuredData={featuredData}
-              moviesData={moviesData}
-            />
-          )}
+            )}
 
-          {loadingMovies ? (
-            // Skeleton for HindiMovies section
-            <div className="mt-8 px-2">
-              <Skeleton height={30} className="rounded-lg mb-4" />
-              <div className="flex space-x-4 overflow-x-scroll">
-                {[...Array(10)].map((_, index) => (
-                  <div key={index}>
-                    <Skeleton
-                      height="150px"
-                      width="220px"
-                      className="rounded-lg"
-                    />
-                  </div>
-                ))}
+            {loadingMovies ? (
+              // Skeleton for HindiMovies section
+              <div className="mt-8 px-2">
+                <Skeleton height={30} className="rounded-lg mb-4" />
+                <div className="flex space-x-4 overflow-x-scroll">
+                  {[...Array(10)].map((_, index) => (
+                    <div key={index}>
+                      <Skeleton
+                        height="150px"
+                        width="220px"
+                        className="rounded-lg"
+                      />
+                    </div>
+                  ))}
+                </div>
               </div>
-            </div>
-          ) : (
-            <HindiMovies moviesData={hindiMovies} />
-          )}
+            ) : (
+              <HindiMovies moviesData={hindiMovies} />
+            )}
 
-          {loadingMovies ? (
-            // Skeleton for English Movies section
-            <div className="mt-8 px-2">
-              <Skeleton height={30} className="rounded-lg mb-4" />
-              <div className="flex space-x-4 overflow-x-scroll">
-                {[...Array(10)].map((_, index) => (
-                  <div key={index}>
-                    <Skeleton
-                      height="150px"
-                      width="220px"
-                      className="rounded-lg"
-                    />
-                  </div>
-                ))}
+            {loadingMovies ? (
+              // Skeleton for English Movies section
+              <div className="mt-8 px-2">
+                <Skeleton height={30} className="rounded-lg mb-4" />
+                <div className="flex space-x-4 overflow-x-scroll">
+                  {[...Array(10)].map((_, index) => (
+                    <div key={index}>
+                      <Skeleton
+                        height="150px"
+                        width="220px"
+                        className="rounded-lg"
+                      />
+                    </div>
+                  ))}
+                </div>
               </div>
-            </div>
-          ) : (
-            <EnglishMovies moviesData={englishMovies} />
-          )}
+            ) : (
+              <EnglishMovies moviesData={englishMovies} />
+            )}
 
-          {loadingMovies ? (
-            // Skeleton for Hindi Action Movies section
-            <div className="mt-8 px-2">
-              <Skeleton height={30} className="rounded-lg mb-4" />
-              <div className="flex space-x-4 overflow-x-scroll">
-                {[...Array(10)].map((_, index) => (
-                  <div key={index}>
-                    <Skeleton
-                      height="150px"
-                      width="220px"
-                      className="rounded-lg"
-                    />
-                  </div>
-                ))}
+            {loadingMovies ? (
+              // Skeleton for Hindi Action Movies section
+              <div className="mt-8 px-2">
+                <Skeleton height={30} className="rounded-lg mb-4" />
+                <div className="flex space-x-4 overflow-x-scroll">
+                  {[...Array(10)].map((_, index) => (
+                    <div key={index}>
+                      <Skeleton
+                        height="150px"
+                        width="220px"
+                        className="rounded-lg"
+                      />
+                    </div>
+                  ))}
+                </div>
               </div>
-            </div>
-          ) : (
-            <HindiActionMovies moviesData={hindiActionMovies} />
-          )}
+            ) : (
+              <HindiActionMovies moviesData={hindiActionMovies} />
+            )}
 
-          {loadingMovies ? (
-            // Skeleton for Comedy Movies section
-            <div className="mt-8 px-2">
-              <Skeleton height={30} className="rounded-lg mb-4" />
-              <div className="flex space-x-4 overflow-x-scroll">
-                {[...Array(10)].map((_, index) => (
-                  <div key={index}>
-                    <Skeleton
-                      height="150px"
-                      width="220px"
-                      className="rounded-lg"
-                    />
-                  </div>
-                ))}
+            {loadingMovies ? (
+              // Skeleton for Comedy Movies section
+              <div className="mt-8 px-2">
+                <Skeleton height={30} className="rounded-lg mb-4" />
+                <div className="flex space-x-4 overflow-x-scroll">
+                  {[...Array(10)].map((_, index) => (
+                    <div key={index}>
+                      <Skeleton
+                        height="150px"
+                        width="220px"
+                        className="rounded-lg"
+                      />
+                    </div>
+                  ))}
+                </div>
               </div>
-            </div>
-          ) : (
-            <ComedyMovies moviesData={comedyMovies} />
-          )}
+            ) : (
+              <ComedyMovies moviesData={comedyMovies} />
+            )}
 
-          {loadingMovies ? (
-            // Skeleton for Recent Movies section
-            <div className="mt-8 px-2">
-              <Skeleton height={30} className="rounded-lg mb-4" />
-              <div className="flex space-x-4 overflow-x-scroll">
-                {[...Array(10)].map((_, index) => (
-                  <div key={index}>
-                    <Skeleton
-                      height="150px"
-                      width="220px"
-                      className="rounded-lg"
-                    />
-                  </div>
-                ))}
+            {loadingMovies ? (
+              // Skeleton for Recent Movies section
+              <div className="mt-8 px-2">
+                <Skeleton height={30} className="rounded-lg mb-4" />
+                <div className="flex space-x-4 overflow-x-scroll">
+                  {[...Array(10)].map((_, index) => (
+                    <div key={index}>
+                      <Skeleton
+                        height="150px"
+                        width="220px"
+                        className="rounded-lg"
+                      />
+                    </div>
+                  ))}
+                </div>
               </div>
-            </div>
-          ) : (
-            <RecentMovies moviesData={recentMovies} />
-          )}
+            ) : (
+              <RecentMovies moviesData={recentMovies} />
+            )}
 
-          {loadingMovies ? (
-            // Skeleton for Adventure Movies section
-            <div className="mt-8 px-2">
-              <Skeleton height={30} className="rounded-lg mb-4" />
-              <div className="flex space-x-4 overflow-x-scroll">
-                {[...Array(10)].map((_, index) => (
-                  <div key={index}>
-                    <Skeleton
-                      height="150px"
-                      width="220px"
-                      className="rounded-lg"
-                    />
-                  </div>
-                ))}
+            {loadingMovies ? (
+              // Skeleton for Adventure Movies section
+              <div className="mt-8 px-2">
+                <Skeleton height={30} className="rounded-lg mb-4" />
+                <div className="flex space-x-4 overflow-x-scroll">
+                  {[...Array(10)].map((_, index) => (
+                    <div key={index}>
+                      <Skeleton
+                        height="150px"
+                        width="220px"
+                        className="rounded-lg"
+                      />
+                    </div>
+                  ))}
+                </div>
               </div>
-            </div>
-          ) : (
-            <AdventureMovies moviesData={adventureMovies} />
-          )}
-          {loadingMovies ? (
-            // Skeleton for Action Movies section
-            <div className="mt-8 px-2">
-              <Skeleton height={30} className="rounded-lg mb-4" />
-              <div className="flex space-x-4 overflow-x-scroll">
-                {[...Array(10)].map((_, index) => (
-                  <div key={index}>
-                    <Skeleton
-                      height="150px"
-                      width="220px"
-                      className="rounded-lg"
-                    />
-                  </div>
-                ))}
+            ) : (
+              <AdventureMovies moviesData={adventureMovies} />
+            )}
+            {loadingMovies ? (
+              // Skeleton for Action Movies section
+              <div className="mt-8 px-2">
+                <Skeleton height={30} className="rounded-lg mb-4" />
+                <div className="flex space-x-4 overflow-x-scroll">
+                  {[...Array(10)].map((_, index) => (
+                    <div key={index}>
+                      <Skeleton
+                        height="150px"
+                        width="220px"
+                        className="rounded-lg"
+                      />
+                    </div>
+                  ))}
+                </div>
               </div>
-            </div>
-          ) : (
-            <ActionMovies moviesData={actionMovies} />
-          )}
+            ) : (
+              <ActionMovies moviesData={actionMovies} />
+            )}
+          </div>
         </div>
-      </div>
-      <Footer />
-    </SkeletonTheme>
+        <Footer />
+      </SkeletonTheme>
     </>
   );
 };
