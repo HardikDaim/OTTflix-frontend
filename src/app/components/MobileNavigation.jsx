@@ -1,6 +1,5 @@
 "use client";
 import React from "react";
-import { motion } from "framer-motion";
 import { MdOutlineHome } from "react-icons/md";
 import { FiTv, FiSearch } from "react-icons/fi";
 import { IoFolderOutline } from "react-icons/io5";
@@ -22,7 +21,7 @@ const MobileNavigation = () => {
   ];
 
   return (
-    <div className="fixed bottom-0 left-0 w-full bg-black bg-opacity-60 text-gray-400 flex justify-around items-center py-2 z-50 lg:hidden select-none">
+    <div className="fixed bottom-0 left-0 w-full bg-black bg-opacity-80 text-gray-400 flex justify-around items-center py-2 z-50 lg:hidden select-none">
       {menuItems.map(({ href, icon, label }, index) => (
         <Link href={href} key={index} passHref>
           <button
