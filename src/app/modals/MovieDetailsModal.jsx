@@ -74,7 +74,7 @@ const MovieDetailsModal = ({ movie, onClose }) => {
       exit="hidden"
     >
       <motion.div
-        className="bg-black border-2 border-gray-500 rounded-lg w-[95%] md:w-[70%] lg:w-[50%] overflow-y-auto max-h-[80vh] mb-16 md:max-h-[90vh] shadow-lg text-xs"
+        className="bg-black border-2 border-gray-500 rounded-lg w-[95%] md:w-[70%] lg:w-[50%] overflow-y-auto max-h-[80vh] mb-16 lg:mb-0 md:max-h-[90vh] shadow-lg text-xs"
         variants={modalVariants}
         initial="hidden"
         animate="visible"
