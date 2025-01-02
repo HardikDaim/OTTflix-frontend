@@ -260,7 +260,7 @@ const VideoPlayer = ({ videoUrl, onClose }) => {
                 }}
               />
               <span className="ml-2 text-white text-sm">
-                {formatTime(duration - currentTime)}
+                -{formatTime(duration - currentTime)}
               </span>
               <style jsx>{`
                 input[type="range"]::-webkit-slider-thumb {

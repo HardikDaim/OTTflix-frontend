@@ -108,10 +108,10 @@ const FeaturedSection = ({ featuredData, moviesData }) => {
 
           <div className="text-xs lg:text-sm mt-2 font-poppins opacity-75">
             {" "}
-            <ul className="flex space-x-4">
+            <ul className="flex gap-x-4 md:gap-x-6 list-disc">
               {featuredData?.getFeaturedVideo[0]?.genres?.map(
                 (genre, index) => (
-                  <li key={index} className="list-disc">
+                  <li key={index}>
                     {genre}
                   </li>
                 )
@@ -153,6 +153,7 @@ const FeaturedSection = ({ featuredData, moviesData }) => {
 
         {/* Mute/Unmute Button */}
         <div className="absolute bottom-[11rem] md:bottom-40 lg:bottom-60 right-0 flex items-center space-x-4">
+          {isVideoLoaded && (
           <button
             onClick={toggleMute}
             className="bg-transparent border-2 border-white border-opacity-50 hover:bg-opacity-50 hover:bg-black text-white text-opacity-70 p-3 mr-4 md:mr-0 rounded-full"
@@ -163,6 +164,7 @@ const FeaturedSection = ({ featuredData, moviesData }) => {
               <FaVolumeUp size={16} /> // Unmute icon
             )}
           </button>
+          )}
           <span className="hidden md:flex text-white text-xs lg:text-sm bg-black bg-opacity-40 border-l-2 border-white p-2 pr-8">
             {featuredData?.getFeaturedVideo[0].rating}
           </span>
