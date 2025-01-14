@@ -134,7 +134,7 @@ const Home = () => {
               <div className="mb-6">
                 <Skeleton
                   width="100%"
-                  className="h-[330px] md:h-[580px] lg:h-[660px] rounded-lg"
+                  className="h-[370px] md:h-[580px] lg:h-[660px] rounded-lg"
                 />
               </div>
             ) : (

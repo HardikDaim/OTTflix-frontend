@@ -31,7 +31,7 @@ const ActionMovies = ({ moviesData }) => {
         <div className="hidden"></div>
       ) : (
         <div className="mt-8 px-2 select-none">
-          <h2 className="text-2xl font-semibold text-white mb-4">
+          <h2 className="text-lg md:text-2xl font-semibold text-white mb-4">
             Best Action Movies
           </h2>
           <div className="relative group">
@@ -86,7 +86,7 @@ const ActionMovies = ({ moviesData }) => {
                     <div
                       onClick={() => handleMovieClick(movie)}
                       key={movie.id}
-                      className="w-[220px] h-[130px] bg-gray-800 flex-shrink-0 cursor-pointer"
+                      className="w-[170px] h-[95px] md:w-[220px] md:h-[130px] bg-gray-800 flex-shrink-0 cursor-pointer"
                     >
                       <img
                         src={

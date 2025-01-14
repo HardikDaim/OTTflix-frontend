@@ -68,14 +68,14 @@ const FeaturedSection = ({ featuredData, moviesData }) => {
                 "https://via.placeholder.com/150"
               }
               alt="Video Thumbnail"
-              className="w-full h-auto max-h-[330px] md:max-h-[580px] lg:max-h-[660px] object-cover absolute top-0 left-0"
+              className="w-full h-auto max-h-[230px] md:max-h-[580px] lg:max-h-[660px] object-cover absolute top-0 left-0"
             />
           )}
 
           {/* Video element */}
           <video
             ref={videoRef}
-            className="w-full h-auto max-h-[330px] md:max-h-[580px] lg:max-h-[660px] object-cover absolute top-0 left-0"
+            className="w-full h-auto max-h-[230px] md:max-h-[580px] lg:max-h-[660px] object-cover absolute top-0 left-0"
             autoPlay
             loop
             muted={isMuted}
@@ -95,7 +95,7 @@ const FeaturedSection = ({ featuredData, moviesData }) => {
           <span className="text-green-400 font-bold text-[8px] md:text-xs lg:text-sm mb-2 bg-black bg-opacity-50 p-1 md:p-2">
             Coming Soon
           </span>
-          <h1 className="text-sm md:text-4xl lg:text-6xl font-bold font-roboto my-1 md:my-10 lg:my-10">
+          <h1 className="text-lg md:text-4xl lg:text-6xl font-bold font-roboto my-0 md:my-10 lg:my-10">
             {featuredData?.getFeaturedVideo[0]?.title && (
               <>
                 {featuredData.getFeaturedVideo[0].title.split(" ")[0]}
@@ -109,7 +109,7 @@ const FeaturedSection = ({ featuredData, moviesData }) => {
             )}
           </h1>
 
-          <div className="text-[8px] md:text-xs lg:text-sm mt-2 px-2 xl:px-3 font-poppins opacity-75">
+          <div className="text-[10px] md:text-xs lg:text-sm mt-2 px-2 xl:px-3 font-poppins opacity-75">
             {" "}
             <ul className="flex gap-x-3 md:gap-x-6 list-disc">
               {featuredData?.getFeaturedVideo[0]?.genres?.map(
@@ -119,7 +119,7 @@ const FeaturedSection = ({ featuredData, moviesData }) => {
               )}
             </ul>
           </div>
-          <p className="text-[8px] md:text-xs lg:text-sm mt-2 opacity-75 ">
+          <p className="text-[10px] md:text-xs lg:text-sm my-2 md:mt-2 opacity-75 ">
             {featuredData?.getFeaturedVideo[0]?.description
               .split(" ")
               .map((word, index) => (
@@ -129,11 +129,11 @@ const FeaturedSection = ({ featuredData, moviesData }) => {
                 </React.Fragment>
               ))}
           </p>
-          <div className="my-4 md:my-12 space-x-4 md:space-x-8 flex items-center">
+          <div className="my-2 md:my-12 space-x-4 md:space-x-8 flex items-center">
             {/* Play Button with Play Icon */}
             <button
               onClick={handlePlayClick}
-              className="bg-white text-[8px] md:text-xl lg:text-2xl text-black px-2 md:px-6 py-1 md:py-2 font-semibold flex items-center space-x-1 md:space-x-2"
+              className="bg-white text-sm md:text-xl lg:text-2xl text-black px-2 md:px-6 py-1 md:py-2 font-semibold flex items-center space-x-1 md:space-x-2"
             >
               <FaPlay /> {/* Play icon */}
               <span>Play</span>
@@ -144,7 +144,7 @@ const FeaturedSection = ({ featuredData, moviesData }) => {
               onClick={() =>
                 handleMovieClick(featuredData?.getFeaturedVideo[0])
               }
-              className="border text-[8px] sm:text-xs md:text-xl lg:text-2xl border-white px-2 md:px-6 py-1 md:py-2 text-white font-semibold flex items-center space-x-1 md:space-x-2"
+              className="border text-sm  md:text-xl lg:text-2xl border-white px-2 md:px-6 py-1 md:py-2 text-white font-semibold flex items-center space-x-1 md:space-x-2"
             >
               <FaInfoCircle /> {/* Info icon */}
               <span>Detail</span>
@@ -153,11 +153,11 @@ const FeaturedSection = ({ featuredData, moviesData }) => {
         </div>
 
         {/* Mute/Unmute Button */}
-        <div className="absolute bottom-[140px] md:bottom-[11.5rem] lg:bottom-50 right-0 flex items-center space-x-4">
+        <div className="absolute bottom-[115px] md:bottom-[11.5rem] lg:bottom-50 right-0 flex items-center space-x-4">
           {isVideoLoaded && (
             <button
               onClick={toggleMute}
-              className="bg-transparent border text-xs md:text-sm lg:text-lg border-white border-opacity-50 hover:bg-opacity-50 hover:bg-black text-white text-opacity-70 p-1 md:p-3 mr-4 md:mr-0 rounded-full"
+              className="bg-transparent border text-xs md:text-sm lg:text-lg border-white border-opacity-50 hover:bg-opacity-50 hover:bg-black text-white text-opacity-70 p-2 md:p-3 mr-4 md:mr-0 rounded-full"
             >
               {isMuted ? (
                 <FaVolumeMute /> // Mute icon
@@ -220,7 +220,7 @@ const FeaturedSection = ({ featuredData, moviesData }) => {
             {moviesData?.getMovies.map((movie) => (
               <div
                 key={movie.id}
-                className="w-[220px] h-[130px] bg-gray-800 flex-shrink-0 cursor-pointer"
+                className="w-[170px] h-[95px] md:w-[220px] md:h-[130px] bg-gray-800 flex-shrink-0 cursor-pointer"
                 onClick={() => handleMovieClick(movie)}
               >
                 <img

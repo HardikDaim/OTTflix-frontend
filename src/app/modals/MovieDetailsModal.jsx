@@ -86,7 +86,7 @@ const MovieDetailsModal = ({ movie, onClose }) => {
             <img
               src={movie.thumbnail}
               alt={movie.title}
-              className="w-full h-[250px] md:h-[400px] object-contain absolute top-0 left-0"
+              className="w-full h-[250px] md:h-[400px] object-cover absolute top-0 left-0"
             />
           )}
 
@@ -109,9 +109,9 @@ const MovieDetailsModal = ({ movie, onClose }) => {
 
           <button
             onClick={handlePlayClick}
-            className="absolute bottom-4 left-4 md:left-8 bg-white text-sm md:text-2xl text-black py-2 px-6 font-semibold flex items-center space-x-2 hover:bg-gray-200 transition-colors"
+            className="absolute bottom-4 left-4 md:left-8 bg-white text-xs md:text-2xl text-black py-2 px-6 font-semibold flex items-center space-x-2 hover:bg-gray-200 transition-colors"
           >
-            <FaPlay className="text-xl" />
+            <FaPlay className="text-md md:text-xl" />
             <span>Play</span>
           </button>
 

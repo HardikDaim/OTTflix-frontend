@@ -144,7 +144,7 @@ const SearchPage = () => {
                 <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
                   {[...Array(15)].map((_, index) => (
                     <div key={index}>
-                      <Skeleton className="w-full h-36 object-cover mb-2rounded-lg" />
+                      <Skeleton className="w-full h-24 xl:h-36 object-cover mb-2rounded-lg" />
                     </div>
                   ))}
                 </div>
@@ -166,10 +166,10 @@ const SearchPage = () => {
                   {recommendLoading ? (
                     <>
                       <Skeleton height={30} className="rounded-lg mb-4" />
-                      <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                      <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
                         {[...Array(15)].map((_, index) => (
                           <div key={index}>
-                            <Skeleton className="w-full h-36 object-cover mb-2 rounded-lg" />
+                            <Skeleton className="w-full h-24 xl:h-36 object-cover mb-2 rounded-lg" />
                           </div>
                         ))}
                       </div>
@@ -183,7 +183,7 @@ const SearchPage = () => {
                       <h2 className="text-xl font-bold mb-4">
                         Recommended Movies
                       </h2>
-                      <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                      <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
                         {recommendData?.recommendedMovies.map((movie) => (
                           <div
                             onClick={() => handleMovieClick(movie)}
@@ -193,7 +193,7 @@ const SearchPage = () => {
                             <img
                               src={movie.thumbnail}
                               alt={movie.title}
-                              className="w-full h-36 object-cover mb-2"
+                              className="w-full h-24 xl:h-36 object-cover mb-2"
                             />
                             <p className="text-white text-xs">
                               {movie.title.length > 17
@@ -219,7 +219,7 @@ const SearchPage = () => {
                   <img
                     src={movie.thumbnail}
                     alt={movie.title}
-                    className="w-full h-36 object-cover mb-2"
+                    className="w-full h-24 xl:h-36 object-cover mb-2"
                   />
                   <h3 className="text-md font-bold mb-2">
                     {movie.title.length > 17
