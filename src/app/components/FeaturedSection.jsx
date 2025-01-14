@@ -80,7 +80,7 @@ const FeaturedSection = ({ featuredData, moviesData }) => {
             loop
             muted={isMuted}
             controls={false}
-            src={featuredData.getFeaturedVideo[0]?.trailerUrl}
+            src="/video/banner.mp4"
             onLoadedData={handleVideoLoad} // Trigger when video is ready
           ></video>
         </>
@@ -93,17 +93,20 @@ const FeaturedSection = ({ featuredData, moviesData }) => {
       <div className="absolute inset-0 flex flex-col justify-between pt-8 px-2 text-white">
         <div>
           <span className="text-green-400 font-bold text-xs lg:text-sm mb-2 bg-black bg-opacity-50 p-2">
-            New Arrivals
+            Coming Soon
           </span>
-          <h1 className="text-3xl md:text-4xl lg:text-8xl font-bold font-roboto my-4 lg:my-8">
-            {featuredData?.getFeaturedVideo[0]?.title
-              .split(" ")
-              .map((word, index) => (
-                <React.Fragment key={index}>
-                  {word}
-                  <br />
-                </React.Fragment>
-              ))}
+          <h1 className="text-2xl md:text-4xl lg:text-6xl font-bold font-roboto my-6 md:my-4 lg:my-10">
+            {featuredData?.getFeaturedVideo[0]?.title && (
+              <>
+                {featuredData.getFeaturedVideo[0].title.split(" ")[0]}
+                <div className="lg:mt-4">
+                  {featuredData.getFeaturedVideo[0].title
+                    .split(" ")
+                    .slice(1)
+                    .join(" ")}
+                </div>
+              </>
+            )}
           </h1>
 
           <div className="text-xs lg:text-sm mt-2 font-poppins opacity-75">
@@ -111,9 +114,7 @@ const FeaturedSection = ({ featuredData, moviesData }) => {
             <ul className="flex gap-x-4 md:gap-x-6 list-disc">
               {featuredData?.getFeaturedVideo[0]?.genres?.map(
                 (genre, index) => (
-                  <li key={index}>
-                    {genre}
-                  </li>
+                  <li key={index}>{genre}</li>
                 )
               )}
             </ul>
@@ -152,20 +153,20 @@ const FeaturedSection = ({ featuredData, moviesData }) => {
         </div>
 
         {/* Mute/Unmute Button */}
-        <div className="absolute bottom-[11rem] md:bottom-40 lg:bottom-60 right-0 flex items-center space-x-4">
+        <div className="absolute bottom-[10.5rem] lg:bottom-60 right-0 flex items-center space-x-4">
           {isVideoLoaded && (
-          <button
-            onClick={toggleMute}
-            className="bg-transparent border-2 border-white border-opacity-50 hover:bg-opacity-50 hover:bg-black text-white text-opacity-70 p-3 mr-4 md:mr-0 rounded-full"
-          >
-            {isMuted ? (
-              <FaVolumeMute size={16} /> // Mute icon
-            ) : (
-              <FaVolumeUp size={16} /> // Unmute icon
-            )}
-          </button>
+            <button
+              onClick={toggleMute}
+              className="bg-transparent border-2 border-white border-opacity-50 hover:bg-opacity-50 hover:bg-black text-white text-opacity-70 p-3 mr-4 md:mr-0 rounded-full"
+            >
+              {isMuted ? (
+                <FaVolumeMute size={16} /> // Mute icon
+              ) : (
+                <FaVolumeUp size={16} /> // Unmute icon
+              )}
+            </button>
           )}
-          <span className="hidden md:flex text-white text-xs lg:text-sm bg-black bg-opacity-40 border-l-2 border-white p-2 pr-8">
+          <span className="hidden md:flex text-white text-xs lg:text-sm bg-black bg-opacity-40 border-l-2 border-white p-2 ">
             {featuredData?.getFeaturedVideo[0].rating}
           </span>
         </div>
@@ -219,7 +220,7 @@ const FeaturedSection = ({ featuredData, moviesData }) => {
             {moviesData?.getMovies.map((movie) => (
               <div
                 key={movie.id}
-                className="w-[220px] h-[150px] bg-gray-800 flex-shrink-0 cursor-pointer"
+                className="w-[220px] h-[130px] bg-gray-800 flex-shrink-0 cursor-pointer"
                 onClick={() => handleMovieClick(movie)}
               >
                 <img

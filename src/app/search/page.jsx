@@ -214,12 +214,12 @@ const SearchPage = () => {
                 <div
                   onClick={() => handleMovieClick(movie)}
                   key={movie.id}
-                  className="cursor-pointer shadow-md"
+                  className="cursor-pointer shadow-md text-center"
                 >
                   <img
                     src={movie.thumbnail}
                     alt={movie.title}
-                    className="w-full h-48 object-cover rounded-t-md mb-4"
+                    className="w-full h-36 object-cover mb-2"
                   />
                   <h3 className="text-md font-bold mb-2">
                     {movie.title.length > 17

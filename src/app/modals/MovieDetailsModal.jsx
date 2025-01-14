@@ -86,13 +86,13 @@ const MovieDetailsModal = ({ movie, onClose }) => {
             <img
               src={movie.thumbnail}
               alt={movie.title}
-              className="w-full h-[250px] md:h-[400px] object-cover absolute top-0 left-0"
+              className="w-full h-[250px] md:h-[400px] object-contain absolute top-0 left-0"
             />
           )}
 
           {/* Video element */}
           <video
-            src={movie.trailerUrl}
+            src={movie.featured == true ? "/video/banner.mp4" : movie.trailerUrl}
             autoPlay
             loop
             muted={isMuted}
@@ -116,12 +116,15 @@ const MovieDetailsModal = ({ movie, onClose }) => {
           </button>
 
           {/* Speaker Button */}
+          {isVideoLoaded && (
           <button
             onClick={toggleMute}
             className="absolute bottom-4 right-4 text-white bg-black bg-opacity-50 p-2 rounded-full hover:bg-opacity-80 transition-colors"
           >
             {isMuted ? <FaVolumeMute className="text-lg" /> : <FaVolumeUp className="text-lg" />}
           </button>
+
+          )}
         </div>
 
         <div className="m-4 md:m-8 opacity-75">

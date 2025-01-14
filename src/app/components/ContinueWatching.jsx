@@ -10,7 +10,7 @@ const ContinueWatching = () => {
          
               <div
                 // key={movie.id}
-                className="w-[220px] h-[150px] bg-gray-800 flex-shrink-0 cursor-pointer"
+                className="w-[220px] h-[130px] bg-gray-800 flex-shrink-0 cursor-pointer"
                 // onClick={() => handleMovieClick(movie)}
               >
                 <img

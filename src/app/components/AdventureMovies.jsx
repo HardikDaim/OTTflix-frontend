@@ -83,7 +83,7 @@ const AdventureMovies = ({ moviesData }) => {
                   <div
                     onClick={() => handleMovieClick(movie)}
                     key={movie.id}
-                    className="w-[220px] h-[150px] bg-gray-800 flex-shrink-0 cursor-pointer"
+                    className="w-[220px] h-[130px] bg-gray-800 flex-shrink-0 cursor-pointer"
                   >
                     <img
                       src={movie.thumbnail || "https://via.placeholder.com/150"}
