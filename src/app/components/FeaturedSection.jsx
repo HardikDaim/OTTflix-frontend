@@ -56,7 +56,7 @@ const FeaturedSection = ({ featuredData, moviesData }) => {
   };
 
   return (
-    <div className="relative select-none bg-cover bg-center h-[330px] md:h-[580px] lg:h-[660px] overflow-hidden shadow-lg">
+    <div className="relative select-none bg-cover bg-center h-[320px] md:h-[580px] lg:h-[660px] overflow-hidden shadow-lg">
       {/* Display the video fetched from getFeaturedVideo */}
       {featuredData?.getFeaturedVideo && (
         <>
@@ -90,7 +90,7 @@ const FeaturedSection = ({ featuredData, moviesData }) => {
       <div className="absolute inset-0 bg-black bg-opacity-50"></div>
 
       {/* Video Content */}
-      <div className="absolute inset-0 flex flex-col justify-between pt-2 md:pt-8 px-2 text-white">
+      <div className="absolute inset-0 flex flex-col justify-between pt-0 md:pt-8 px-2 text-white">
         <div>
           <span className="text-green-400 font-bold text-[8px] md:text-xs lg:text-sm mb-2 bg-black bg-opacity-50 p-1 md:p-2">
             Coming Soon
@@ -133,7 +133,7 @@ const FeaturedSection = ({ featuredData, moviesData }) => {
             {/* Play Button with Play Icon */}
             <button
               onClick={handlePlayClick}
-              className="bg-white text-sm md:text-xl lg:text-2xl text-black px-2 md:px-6 py-1 md:py-2 font-semibold flex items-center space-x-1 md:space-x-2"
+              className="bg-white text-xs md:text-xl lg:text-2xl text-black px-2 md:px-6 py-1 md:py-2 font-semibold flex items-center space-x-1 md:space-x-2"
             >
               <FaPlay /> {/* Play icon */}
               <span>Play</span>
@@ -144,7 +144,7 @@ const FeaturedSection = ({ featuredData, moviesData }) => {
               onClick={() =>
                 handleMovieClick(featuredData?.getFeaturedVideo[0])
               }
-              className="border text-sm  md:text-xl lg:text-2xl border-white px-2 md:px-6 py-1 md:py-2 text-white font-semibold flex items-center space-x-1 md:space-x-2"
+              className="border text-xs  md:text-xl lg:text-2xl border-white px-2 md:px-6 py-1 md:py-2 text-white font-semibold flex items-center space-x-1 md:space-x-2"
             >
               <FaInfoCircle /> {/* Info icon */}
               <span>Detail</span>
@@ -153,7 +153,7 @@ const FeaturedSection = ({ featuredData, moviesData }) => {
         </div>
 
         {/* Mute/Unmute Button */}
-        <div className="absolute bottom-[115px] md:bottom-[11.5rem] lg:bottom-50 right-0 flex items-center space-x-4">
+        <div className="absolute bottom-[113px] md:bottom-[11.5rem] lg:bottom-50 right-0 flex items-center space-x-4">
           {isVideoLoaded && (
             <button
               onClick={toggleMute}
