@@ -226,7 +226,7 @@ const FeaturedSection = ({ featuredData, moviesData }) => {
                 <img
                   src={movie.thumbnail}
                   alt={movie.title}
-                  className="w-full h-full object-cover rounded-lg"
+                  className="w-full h-full object-cover"
                 />
               </div>
             ))}
