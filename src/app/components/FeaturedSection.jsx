@@ -109,7 +109,7 @@ const FeaturedSection = ({ featuredData, moviesData }) => {
             )}
           </h1>
 
-          <div className="text-[10px] md:text-xs lg:text-sm mt-2 px-2 xl:px-3 font-poppins opacity-75">
+          <div className="text-[10px] md:text-xs lg:text-sm mt-2 px-2 xl:px-4 font-poppins opacity-75">
             {" "}
             <ul className="flex gap-x-3 md:gap-x-6 list-disc">
               {featuredData?.getFeaturedVideo[0]?.genres?.map(
